@@ -1,0 +1,7 @@
+<td [ngClass]="setClasses()">{{task.id}}</td>
+<td [ngClass]="setClasses()">{{task.description}}</td>
+<td (click)="onToggle(task)">
+  <i id="isDoneIcon" [className]="task.done ? 'fa fa-check-circle fa-x2' : 'fa fa-circle-thin fa-x2'" style="color:blue">
+  </i>
+</td>
+	

@@ -1,0 +1,13 @@
+#labelShowEntries{
+	margin-right: 5px;
+	padding-top: 2px;
+	float: left;
+}
+
+#selectEntries{
+	display: inline-block;
+}
+
+#dtBasicExample_length {
+	display: inline-block;
+}
