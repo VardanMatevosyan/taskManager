@@ -31,4 +31,13 @@ export class TasksComponent implements OnInit {
     return this.tasks;
   }
 
+    public addTask(task: Task) {
+    this.httpClientService.saveTask(task).subscribe(
+      response => this.tasks.push(task),
+    );
+
+    console.log('%c Add new TASK', "color: green;")
+    console.table(task);
+  }
+
 }

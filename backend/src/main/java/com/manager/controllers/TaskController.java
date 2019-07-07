@@ -5,7 +5,7 @@ import com.manager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +36,12 @@ public class TaskController {
     @PostMapping(value = "/save", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public Task save(@RequestBody final Task task) {
+        task.setCreateDate(new Timestamp(System.currentTimeMillis()));
         return this.taskService.addTask(task);
     }
 
-    @DeleteMapping(value = "/delete/${id}")
-    public void delete(@PathVariable final String id) {
+    @DeleteMapping(value = "/delete/{id}")
+    public void delete(@PathVariable(name = "id") final String id) {
         this.taskService.deleteTask(id);
     }
 }

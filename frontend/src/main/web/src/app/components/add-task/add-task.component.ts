@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClientService } from '../../service/http-client.service';
 import {Task} from '../../models/Task';
-import { TasksComponent } from '../tasks/TasksComponent'
+import { TasksComponent } from '../tasks/tasks.component';
 
 
 @Component({
@@ -10,8 +10,7 @@ import { TasksComponent } from '../tasks/TasksComponent'
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-  private task: Array<Task> = new TasksComponent().getTasks():
-  let description: string;
+  private description: string;
   @Output() addTask: EventEmitter<any> = new EventEmitter();
 
   constructor(private httpClientService: HttpClientService) { }
@@ -19,24 +18,17 @@ export class AddTaskComponent implements OnInit {
   ngOnInit() {
   }
 
-  public saveTask(): void {
+
+  public onClick(): void {
     let task: Task = new Task();
     task.setDescription(this.description);
-    task.setDone(false);
-    task.setCreateDate();
-
+   
     this.addTask.emit(task);
 
-    this.httpClientService.saveTask(task).subscribe(
-      response => this.handleSuccessfullResponse(response),
-    );
-  }
+    console.log('%c in onClick Add new TASK', "color: green;")
+    console.table(task);
 
-    private handleSuccessfullResponse(task: Task): void {
-    this.tasks.push(task);
-    console.log('%c Add new TASK', "color: green;")
-    console.table(response);
-    }
+  }
 
 
 
