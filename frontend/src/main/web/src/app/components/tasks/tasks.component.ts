@@ -27,4 +27,8 @@ export class TasksComponent implements OnInit {
   console.table(this.tasks);
   }
 
+  public getTasks(): Array<Task> {
+    return this.tasks;
+  }
+
 }

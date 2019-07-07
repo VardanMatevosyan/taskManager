@@ -1,7 +1,9 @@
-<div id="faPlusIcon">
-  	<i class="fa fa-plus-circle fa-2x" style="color:green"></i>
-</div>
+<form class="addTaskForm">
+  <div id="faPlusIcon">
+      <i (click)="saveTask()" ,class="fa fa-plus-circle fa-2x" style="color:green"></i>
+  </div>
 
-<div id="addTaskDiv">
-  	<input type="text" class="form-control form-control-sm" placeholder="Add task">
-</div>
+  <div id="addTaskDiv">
+      <input [(ngModel)]="description" name="description" type="text" class="form-control form-control-sm" placeholder="Add task">
+  </div>
+</form>

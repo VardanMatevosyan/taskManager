@@ -3,12 +3,8 @@ package com.manager.controllers;
 import com.manager.models.Task;
 import com.manager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
@@ -26,12 +22,25 @@ public class TaskController {
     }
 
     @GetMapping(produces = "application/json")
+    @ResponseBody
     public List<Task> getTasks() {
         return this.taskService.getAll();
     }
 
-    @PutMapping(value = "/update", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @ResponseBody
     public Task update(@RequestBody final Task task) {
     	return this.taskService.update(task);
+    }
+
+    @PostMapping(value = "/save", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public Task save(@RequestBody final Task task) {
+        return this.taskService.addTask(task);
+    }
+
+    @DeleteMapping(value = "/delete/${id}")
+    public void delete(@PathVariable final String id) {
+        this.taskService.deleteTask(id);
     }
 }

@@ -20,5 +20,9 @@ public updateTask(task: Task): Observable<any> {
 	return this.http.put<Task>("//localhost:8080/tasks/update", task);
 }
 
+  public saveTask(task: Task): Observable<any> {
+    return this.http.post<Task>("//localhost:8080/tasks/save", task);
+  }
+
 }
 
