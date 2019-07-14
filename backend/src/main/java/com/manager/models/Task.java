@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Column(name = "description")
     private String description;
@@ -44,7 +44,7 @@ public class Task {
      * @param done task done.
      */
 
-    public Task(final int id, final String description, final Boolean done) {
+    public Task(final String id, final String description, final Boolean done) {
         this.id = id;
         this.description = description;
         this.createDate = new Timestamp(System.currentTimeMillis());
@@ -56,7 +56,7 @@ public class Task {
      * @return task id.
      */
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -90,7 +90,7 @@ public class Task {
      * @param id task id.
      */
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

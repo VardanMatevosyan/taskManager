@@ -35,12 +35,6 @@
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!--!&ndash; https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -52,10 +46,9 @@
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>6.1.0.jre8</version>
+            <version>7.2.2.jre8</version>
             <scope>compile</scope>
         </dependency>
-
 
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -65,14 +58,6 @@
             <version>5.3.2.Final</version>
         </dependency>
 
-<!-- 
-        <dependency>
-            <groupId>com.manager</groupId>
-            <artifactId>frontend</artifactId>
-            <version>1.0</version>
-            <scope>runtime</scope>
-        </dependency>
--->
 
     </dependencies>
 

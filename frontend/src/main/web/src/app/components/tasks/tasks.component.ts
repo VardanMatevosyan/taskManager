@@ -33,22 +33,24 @@ export class TasksComponent implements OnInit {
 
     public addTask(task: Task) {
     this.httpClientService.saveTask(task).subscribe(
-      response => this.tasks.push(task),
+      response => this.tasks.push(response),
+      this.clearInput()
     );
 
     console.log('%c Add new TASK', "color: green;")
     console.table(task);
   }
 
-  public deleteTask(task: Task) {
-    deleted: boolean = false;
-    this.httpClientService.deleteTask(task.id).subscribe(
-      deleted = true;
-    );
+  private clearInput() {
+    var childNodes = document.getElementsByName("description")[0].value = "";
+  }
 
-    if (deleted) {
-      this.tasks = this.task.filter(t => t.id !== task.id);
-    }
+  public deleteTask(task: Task) {
+    let deleted: boolean = false;
+    this.httpClientService.deleteTask(task.id).subscribe(
+      this.tasks = this.tasks.filter(t => t.id !== task.id),
+
+    );
   }
 
 }
