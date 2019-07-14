@@ -9,13 +9,13 @@ import {Task} from '../../models/Task'
 })
 export class TaskComponent implements OnInit {
 	@Input() task: Task;
+	@Output() tasksEE: EventEmitter<Task> = new EventEmitter();
 
   constructor(
 	private httpClientService: HttpClientService
   ) { }
 
   ngOnInit() {
-
   }
 
     setClasses() {
@@ -34,11 +34,14 @@ export class TaskComponent implements OnInit {
   	);
   }
 
-
   handleSuccessfullResponse(response) {
   this.task.done = response.done;
   console.log('%c TASK update', "color: green;")
   console.table(this.task);
   }
 
+  onDelete(task: Task) {
+  this.tasksEE.emit(task);
+
+  }
 }

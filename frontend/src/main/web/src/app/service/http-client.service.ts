@@ -24,5 +24,9 @@ public updateTask(task: Task): Observable<any> {
     return this.http.post<Task>("//localhost:8080/tasks/save", task);
   }
 
+  public deleteTask(id: string): Observable<any>  {
+    return this.http.delete<Task>("//localhost:8080/tasks/delete/" + id);
+  }
+
 }
 

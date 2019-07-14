@@ -40,4 +40,15 @@ export class TasksComponent implements OnInit {
     console.table(task);
   }
 
+  public deleteTask(task: Task) {
+    deleted: boolean = false;
+    this.httpClientService.deleteTask(task.id).subscribe(
+      deleted = true;
+    );
+
+    if (deleted) {
+      this.tasks = this.task.filter(t => t.id !== task.id);
+    }
+  }
+
 }

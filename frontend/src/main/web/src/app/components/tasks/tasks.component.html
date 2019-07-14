@@ -18,7 +18,11 @@
   </thead>
 
   <tbody>
-      <tr app-task  *ngFor="let task of tasks" [task]="task">
+      <tr app-task
+          *ngFor="let task of tasks"
+          [task]="task"
+          (tasksEE)="deleteTask($event)"
+      >
       </tr>
   </tbody>
 

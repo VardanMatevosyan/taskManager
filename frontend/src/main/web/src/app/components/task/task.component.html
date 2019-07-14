@@ -4,4 +4,7 @@
   <i id="isDoneIcon" [className]="task.done ? 'fa fa-check-circle fa-x2' : 'fa fa-circle-thin fa-x2'" style="color:blue">
   </i>
 </td>
+<td>
+  <i id="trashIcon" (click)="onDelete(task)" class="fa fa-trash fa-x2" style="color:red"></i>
+</td>
 	
