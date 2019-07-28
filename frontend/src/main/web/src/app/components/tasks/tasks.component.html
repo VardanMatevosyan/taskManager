@@ -37,3 +37,13 @@
   </tfoot>
 </table>
 </div>
+<div app-page-navigation
+     class="row  justify-content-between"
+     [maxNumber]="3"
+     [page]="page"
+     (nextPageEvent)="getNextPage()"
+     (previousPageEvent)="getPreviousPage()"
+     (pageSizeEvent)="getUpdatedPageSize($event)"
+     (customPageEvent)="getCustomPage($event)"
+>
+</div>

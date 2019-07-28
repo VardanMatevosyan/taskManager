@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './components/task/task.component';
-import { HttpClientModule } from '@angular/common/http';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';

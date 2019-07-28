@@ -3,6 +3,7 @@ package com.manager.controllers;
 import com.manager.models.Task;
 import com.manager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
@@ -23,8 +24,8 @@ public class TaskController {
 
     @GetMapping(produces = "application/json")
     @ResponseBody
-    public List<Task> getTasks() {
-        return this.taskService.getAll();
+    public Page<Task> getTasks(@RequestParam final String page, @RequestParam final String size, @RequestParam final String sort) {
+        return this.taskService.getAll(Integer.valueOf(page), Integer.valueOf(size), sort);
     }
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")

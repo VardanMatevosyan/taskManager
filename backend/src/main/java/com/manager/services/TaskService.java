@@ -3,6 +3,9 @@ package com.manager.services;
 import com.manager.models.Task;
 import com.manager.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,8 +19,8 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAll() {
-        return taskRepository.findAll();
+    public Page<Task> getAll(final int page, final int size, final String sort) {
+        return taskRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
     }
 
     public Task update(final Task task) {
