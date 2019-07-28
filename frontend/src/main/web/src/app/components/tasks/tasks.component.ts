@@ -85,7 +85,7 @@ export class TasksComponent implements OnInit {
   public deleteTask(task: Task) {
     let deleted: boolean = false;
     this.httpClientService.deleteTask(task.id).subscribe(
-     response => this.tasks = this.tasks.filter(t => t.id !== response.id)
+     this.tasks = this.tasks.filter(t => t.id !== task.id)
     );
   }
 
