@@ -24,12 +24,10 @@ export class ShowLimitedTasksComponent implements OnInit {
   }
 
   ngOnInit() {
-  console.log("number " + this.selected);
   }
 
   public changePageSize(size: number): void {
   console.log("schow size is " + size);
-   //this.paginationService.getPageInNewSize(this.page, size);
    this.pageSizeEvent.emit(size);
   }
 
