@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import { DatePipe } from '@angular/common';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +13,7 @@ import { SearchComponent } from './components/search/search.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { ShowLimitedTasksComponent } from './components/show-limited-tasks/show-limited-tasks.component';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
-
+import { DateFormat } from './components/utils/date-format/dateFormat'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { PageNavigationComponent } from './components/page-navigation/page-navig
     SearchComponent,
     AddTaskComponent,
     ShowLimitedTasksComponent,
-    PageNavigationComponent
+    PageNavigationComponent,
+    DateFormat
   ],
   imports: [
     BrowserModule,

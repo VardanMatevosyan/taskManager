@@ -11,7 +11,7 @@ import { Pageable } from '../../models/pagination/pageable';
 })
 
 export class TasksComponent implements OnInit {
-	tasks:   Array<Task>;
+	private tasks: Array<Task>;
  private page: Page<Task> = new Page();
 
 
@@ -79,15 +79,24 @@ export class TasksComponent implements OnInit {
 
 //value param does not exist WHAT?
   private clearInput() {
-    var childNodes = document.getElementsByName("description")[0].innerHTML = "";
+    var childNodes = document.getElementsByName("description")[0].value = "";
   }
 
   public deleteTask(task: Task) {
     let deleted: boolean = false;
     this.httpClientService.deleteTask(task.id).subscribe(
-     this.tasks = this.tasks.filter(t => t.id !== task.id)
+    response => this.handleSuccessOnDelete(response, task)
+
     );
   }
 
+  private handleSuccessOnDelete(response: any, task: Task) {
+    this.tasks = this.tasks.filter(t => t.id !== task.id);
+  }
+
+  private refreshPageWithNewPageSize(newPageSize: number) {
+    this.page.pageable.pageSize = newPageSize;
+    this.getData();
+  }
 
 }

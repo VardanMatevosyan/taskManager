@@ -20,7 +20,8 @@ export class TaskComponent implements OnInit {
 
     setClasses() {
     let classes = {
-    'line_through_when_completed' : this.task.done
+    'line_through_when_completed' : this.task.done,
+    'text-align' : 'justify'
     }
     return classes;
   }

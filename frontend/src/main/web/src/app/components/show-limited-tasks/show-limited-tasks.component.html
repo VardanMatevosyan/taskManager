@@ -4,11 +4,12 @@
  	</div>
 
 	 <div id ="selectEntries">
-  		<select  name="dtBasicExample_length" aria-controls="tasksTable" class="custom-select custom-select-sm form-control form-control-sm">
-  			<option value="10">10</option>
-  			<option value="25">25</option>
-  			<option value="50">50</option>
-  			<option value="100">100</option>
+  		<select (change)="changePageSize($event.target.value)"
+               ng-init="selected = options[0]"
+               name="dtBasicExample_length"
+               aria-controls="tasksTable"
+               class="custom-select custom-select-sm form-control form-control-sm">
+        <option *ngFor="let pageSize of pageSizes" value="{{pageSize.id}}">{{pageSize.size}}</option>
   		</select>
 	</div>
 </div>
