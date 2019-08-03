@@ -79,7 +79,7 @@ export class TasksComponent implements OnInit {
 
 //value param does not exist WHAT?
   private clearInput() {
-    var childNodes = document.getElementsByName("description")[0].value = "";
+    var childNodes = (<HTMLInputElement>document.getElementsByName("description")[0]).value = "";
   }
 
   public deleteTask(task: Task) {
