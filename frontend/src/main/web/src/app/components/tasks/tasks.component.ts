@@ -4,6 +4,7 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 import {Task} from '../../models/Task'
 import {Page} from '../../models/pagination/page'
 import { Pageable } from '../../models/pagination/pageable';
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -26,9 +27,16 @@ export class TasksComponent implements OnInit {
   }
    private getData(): void {
       this.paginationService.getPage(this.page.pageable).subscribe(
-      response => this.handleSuccessfullResponse(response),
+      response => this.handleSuccessfulResponse(response),
       );
    }
+
+    handleSuccessfulResponse(response) {
+      this.page = response;
+      this.tasks = response['content'];
+      console.log('%c TASKS', "color: green;")
+      console.table(this.tasks);
+    }
 
    public getCustomPage(pageNumber: number): void {
    console.log(pageNumber);
@@ -51,13 +59,6 @@ export class TasksComponent implements OnInit {
       this.getData();
     }
 
-
-    handleSuccessfullResponse(response) {
-      this.page = response;
-      this.tasks = response['content'];
-      console.log('%c TASKS', "color: green;")
-      console.table(this.tasks);
-    }
 
     public getTasks(): Array<Task> {
       return this.tasks;
@@ -98,5 +99,32 @@ export class TasksComponent implements OnInit {
     this.page.pageable.pageSize = newPageSize;
     this.getData();
   }
+
+  private search(searchCriteria: string) {
+    if (this.tasks == "" && searchCriteria == "") {
+      this.getData();
+    }
+    if (searchCriteria != "" && this.tasks == "") {
+         this.paginationService.getPage(this.page.pageable).subscribe(
+            response => {
+               this.tasks = response['content'].filter(task => {
+                      return task.description.toLocaleLowerCase().match(searchCriteria.toLocaleLowerCase());
+                });
+            }
+          );
+    }
+    if (searchCriteria != "" && this.tasks != "") {
+      this.tasks = this.tasks.filter(task => {
+        return task.description.toLocaleLowerCase().match(searchCriteria.toLocaleLowerCase());
+      });
+    } else if(searchCriteria == "") {
+      this.getData();
+    }
+
+
+  }
+
+
+
 
 }
