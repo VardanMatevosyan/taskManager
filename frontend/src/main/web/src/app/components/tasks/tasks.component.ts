@@ -23,8 +23,7 @@ export class TasksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.getData();
-
+    this.getData();
   }
    private getData(): void {
       this.paginationService.getPage(this.page.pageable).subscribe(
@@ -77,23 +76,24 @@ export class TasksComponent implements OnInit {
 
   private handleSuccess(response: Task) {
     this.tasks.push(response);
-    this.clearInput();
+    this.clearDescriptionInput();
   }
 
-  private clearInput() {
+  private clearDescriptionInput() {
     var childNodes = (<HTMLInputElement>document.getElementsByName("description")[0]).value = "";
   }
 
   public deleteTask(task: Task) {
     let deleted: boolean = false;
     this.httpClientService.deleteTask(task.id).subscribe(
-    response => this.handleSuccessOnDelete(response, task)
-
+      response => this.handleSuccessOnDelete(response, task)
     );
   }
 
   private handleSuccessOnDelete(response: any, task: Task) {
+    this.getData();
     this.tasks = this.tasks.filter(t => t.id !== task.id);
+    this.filteredTasks = this.tasks.filter(t => t.id !== task.id);
   }
 
   private refreshPageWithNewPageSize(newPageSize: number) {
