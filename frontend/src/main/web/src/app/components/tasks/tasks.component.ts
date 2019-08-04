@@ -13,7 +13,8 @@ import { Pageable } from '../../models/pagination/pageable';
 
 export class TasksComponent implements OnInit {
 	private tasks: Array<Task>;
- private page: Page<Task> = new Page();
+	private filteredTasks: Array<Task>;
+  private page: Page<Task> = new Page();
 
 
   constructor(
@@ -34,6 +35,7 @@ export class TasksComponent implements OnInit {
     handleSuccessfulResponse(response) {
       this.page = response;
       this.tasks = response['content'];
+      this.filteredTasks = this.tasks;
       console.log('%c TASKS', "color: green;")
       console.table(this.tasks);
     }
@@ -78,7 +80,6 @@ export class TasksComponent implements OnInit {
     this.clearInput();
   }
 
-//value param does not exist WHAT?
   private clearInput() {
     var childNodes = (<HTMLInputElement>document.getElementsByName("description")[0]).value = "";
   }
@@ -101,30 +102,13 @@ export class TasksComponent implements OnInit {
   }
 
   private search(searchCriteria: string) {
-    if (this.tasks == "" && searchCriteria == "") {
-      this.getData();
+    if (this.filteredTasks == "" || searchCriteria == "") {
+      this.filteredTasks = this.tasks;
     }
-    if (searchCriteria != "" && this.tasks == "") {
-         this.paginationService.getPage(this.page.pageable).subscribe(
-            response => {
-               this.tasks = response['content'].filter(task => {
-                      return task.description.toLocaleLowerCase().match(searchCriteria.toLocaleLowerCase());
-                });
-            }
-          );
+    if (searchCriteria != "") {
+       this.filteredTasks = this.tasks.filter(task => {
+              return task.description.toLocaleLowerCase().match(searchCriteria.toLocaleLowerCase());
+        });
     }
-    if (searchCriteria != "" && this.tasks != "") {
-      this.tasks = this.tasks.filter(task => {
-        return task.description.toLocaleLowerCase().match(searchCriteria.toLocaleLowerCase());
-      });
-    } else if(searchCriteria == "") {
-      this.getData();
-    }
-
-
   }
-
-
-
-
 }

@@ -23,7 +23,7 @@
 
   <tbody>
       <tr app-task
-          *ngFor="let task of tasks"
+          *ngFor="let task of filteredTasks"
           [task]="task"
           (tasksEE)="deleteTask($event)"
       >
