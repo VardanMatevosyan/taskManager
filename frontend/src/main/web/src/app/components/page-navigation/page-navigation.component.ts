@@ -16,27 +16,32 @@ export class PageNavigationComponent implements OnInit {
   @Output() previousPageEvent = new EventEmitter();
   @Output() pageSizeEvent: EventEmitter<number> = new EventEmitter<number>();
   @Output() customPageEvent: EventEmitter<number> = new EventEmitter<number>();
-  private isPrevActive: boolean = false;
-  private isNextActive: boolean = false;
+  private currentNumberOfFirstRow: number;
+  private currentNumberOfLastRow: number;
   constructor(private paginationService: PaginationService) { }
 
   ngOnInit() {
+      this.getNumberOfTheFirstElementOfThePage();
+      this.getNumberOfTheLastElementOfThePage();
   }
 
   nextPage() {
     this.nextPageEvent.emit();
-    this.isNextActive = true;
-    this.isPrevActive = false;
+    this.getNumberOfTheFirstElementOfThePage();
+    this.getNumberOfTheLastElementOfThePage();
   }
 
   previousPage() {
     this.previousPageEvent.emit();
-    this.isPrevActive = true;
-    this.isNextActive = false;
+    this.getNumberOfTheFirstElementOfThePage();
+    this.getNumberOfTheFirstElementOfThePage();
+    this.getNumberOfTheLastElementOfThePage();
   }
 
   getCustomPage(pageNumber: number) {
     this.customPageEvent.emit(pageNumber);
+    this.getNumberOfTheFirstElementOfThePage();
+    this.getNumberOfTheLastElementOfThePage();
   }
 
   updatePageSize(pageSize: number) {
@@ -44,27 +49,15 @@ export class PageNavigationComponent implements OnInit {
   }
 
   getClassForFirstPageLink() {
-    if (this.page.pageable.pageNumber + 1 > this.maxNumber && this.isPrevActive) {
-          this.isPrevActive = true;
-     } else {
-      this.isPrevActive = false;
-     }
     let classes = {
       "disabled": this.page.first,
-      "active": this.isPrevActive
     };
     return classes;
   }
 
   getClassForLastPageLink() {
-    if (this.page.pageable.pageNumber + 1 > this.maxNumber && this.isNextActive) {
-      this.isNextActive = true;
-    } else {
-      this.isNextActive = false;
-    }
     let classes = {
-      "disabled": this.page.last,
-      "active": this.isNextActive
+      "disabled": this.page.last
     };
     return classes;
   }
@@ -75,4 +68,27 @@ export class PageNavigationComponent implements OnInit {
       "active" : currentNumber == pageNumber
     };
   }
+
+  getNumberOfTheFirstElementOfThePage() {
+    if (this.page.first == undefined || this.page.pageable.pageNumber == 0) {
+   console.log("this page is first");
+      this.currentNumberOfFirstRow = 1;
+    } else if (this.page.pageable.pageNumber < 2) {
+      this.currentNumberOfFirstRow = this.page.pageable.pageSize * (this.page.pageable.pageNumber == 0 ? 1 : this.page.pageable.pageNumber) + 1;
+    } else {
+      this.currentNumberOfFirstRow = this.page.pageable.pageSize * (this.page.pageable.pageNumber == 0 ? 1 : this.page.pageable.pageNumber) + 2;
+    }
+  }
+
+    getNumberOfTheLastElementOfThePage() {
+      if (this.page.first == undefined || this.page.pageable.pageNumber == 0) {
+        this.currentNumberOfLastRow = this.page.pageable.pageSize;
+      } else if (this.page.pageable.pageSize * (this.page.pageable.pageNumber == 0 ? 1 : this.page.pageable.pageNumber ) == this.page.totalElements) {
+        this.currentNumberOfLastRow = this.page.totalElements;
+      } else if (this.page.pageable.pageNumber < 2) {
+        this.currentNumberOfLastRow = this.currentNumberOfFirstRow + this.page.size;
+      } else {
+        this.currentNumberOfLastRow = this.currentNumberOfFirstRow - 1 + this.page.size;
+        }
+    }
 }

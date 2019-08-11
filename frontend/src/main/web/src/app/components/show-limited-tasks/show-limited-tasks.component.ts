@@ -10,7 +10,7 @@ import {PaginationService} from '../../services/pagination/pagination.service';
 })
 
 export class ShowLimitedTasksComponent implements OnInit {
-  @Output() pageSizeEvent: EventEmitter<number> = new EventEmitter<number>();;
+  @Output() pageSizeEvent: EventEmitter<number> = new EventEmitter<number>();
 
   pageSizes: Array<any> = [
     {id: 5, size: 5, selected: true},
@@ -27,7 +27,6 @@ export class ShowLimitedTasksComponent implements OnInit {
   }
 
   public changePageSize(size: number): void {
-  console.log("schow size is " + size);
    this.pageSizeEvent.emit(size);
   }
 
