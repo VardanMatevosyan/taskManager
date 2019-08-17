@@ -102,7 +102,7 @@ export class TasksComponent implements OnInit {
   }
 
   private search(searchCriteria: string) {
-    if (this.filteredTasks == "" || searchCriteria == "") {
+    if (this.filteredTasks == null || searchCriteria == "") {
       this.filteredTasks = this.tasks;
     }
     if (searchCriteria != "") {
