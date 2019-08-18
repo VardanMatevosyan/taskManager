@@ -13,8 +13,8 @@
   				<li class="paginate_button page-item previous" [ngClass]="getClassForFirstPageLink()" id="dtBasicExample_previous">
   					<a [routerLink]="" (click)="previousPage()"  class="page-link"><<</a>
   				</li>
-  				<li class="paginate_button page-item" [ngClass]="getActivePage(page.pageable.pageNumber + 1)">
-  					<a [routerLink]="" (click)="getCustomPage(page.pageable.pageNumber + 1)" class="page-link">{{page.pageable.pageNumber + 1}}</a>
+  				<li class="paginate_button page-item" [ngClass]="getActivePage(page != undefined ? page.pageable.pageNumber + 1 : 0)">
+  					<a [routerLink]="" (click)="getCustomPage(page != undefined ? page.pageable.pageNumber + 1 : 0)" class="page-link">{{page != undefined ? page.pageable.pageNumber + 1 : 0}}</a>
   				</li>
   				<li class="paginate_button page-item next" [ngClass]="getClassForLastPageLink()" id="dtBasicExample_next">
   					<a [routerLink]="" (click)="nextPage()" class="page-link">>></a>

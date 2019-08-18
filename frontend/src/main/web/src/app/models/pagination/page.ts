@@ -10,6 +10,7 @@ export class Page<T> {
   numberOfElements: number;
   size: number;
   number: number;
+  empty: boolean;
   sort: Sort;
   pageable: Pageable;
 

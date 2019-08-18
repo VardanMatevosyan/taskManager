@@ -1,6 +1,7 @@
-<td [ngClass]="setClasses()">{{task.id}}</td>
-<td [ngClass]="setClasses()">{{task.createDate  | dateFormatPipe }}</td>
-<td [ngClass]="setClasses()"  width="65%">{{task.description}}</td>
+
+<td>{{task.id}}</td>
+<td>{{task.createDate  | dateFormatPipe }}</td>
+<td>{{task.description}}</td>
 <td (click)="onToggle(task)">
   <i id="isDoneIcon" [className]="task.done ? 'fa fa-check-circle fa-x2' : 'fa fa-circle-thin fa-x2'" style="color:blue">
   </i>
@@ -8,7 +9,6 @@
 <td>
   <i id="trashIcon" (click)="onDelete(task)" class="fa fa-trash fa-x2" style="color:red"></i>
 </td>
-
 
 
 	

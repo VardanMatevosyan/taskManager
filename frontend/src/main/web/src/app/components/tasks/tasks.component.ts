@@ -4,6 +4,7 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 import {Task} from '../../models/Task'
 import {Page} from '../../models/pagination/page'
 import { Pageable } from '../../models/pagination/pageable';
+import { CommunicationService } from '../../services/communication/communication.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,11 +17,19 @@ export class TasksComponent implements OnInit {
 	private filteredTasks: Array<Task>;
   private page: Page<Task> = new Page();
 
-
   constructor(
 	private httpClientService: HttpClientService,
-	private paginationService: PaginationService
-  ) { }
+	private paginationService: PaginationService,
+	private communicationService: CommunicationService
+  ) {
+    this.communicationService.waitIfPageDoesNotExists().subscribe((result) => {
+    if (result != undefined) {
+        this.paginationService.getPage(result.pageable).subscribe(
+            response => this.handleSuccessfulResponse(response),
+        );
+     }
+    });
+  }
 
   ngOnInit() {
     this.getData();
@@ -33,8 +42,10 @@ export class TasksComponent implements OnInit {
 
     handleSuccessfulResponse(response) {
       this.page = response;
+
       this.tasks = response['content'];
       this.filteredTasks = this.tasks;
+      this.communicationService.updatedPage(this.page);
       console.log('%c TASKS', "color: green;")
       console.table(this.tasks);
     }

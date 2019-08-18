@@ -9,8 +9,8 @@
    <app-search (allFieldsCriteriaEvent)="search($event)"></app-search>
 </div>
 
-<div class="row justify-content-sm-center "   >
-<table id="tasksTable" class="table table-striped table-bordered table-sm " >
+<div class="row justify-content-sm-center ">
+<table id="tasksTable" class="table table-bordered table-sm " >
   <thead class="thead-dark">
     <tr>
       <th >Id</th>
@@ -26,6 +26,7 @@
           *ngFor="let task of filteredTasks"
           [task]="task"
           (tasksEE)="deleteTask($event)"
+          [ngClass]="{'table-success' : task.done, 'table-danger' : !task.done}"
       >
       </tr>
   </tbody>
@@ -44,10 +45,10 @@
 <div app-page-navigation
      class="row  justify-content-between"
      [maxNumber]="3"
-     [page]="page"
+     [page] = "page"
      (nextPageEvent)="getNextPage()"
      (previousPageEvent)="getPreviousPage()"
-     (pageSizeEvent)="getUpdatedPageSize($event)"
      (customPageEvent)="getCustomPage($event)"
 >
 </div>
+<!--(pageSizeEvent)="getUpdatedPageSize($event)"-->
