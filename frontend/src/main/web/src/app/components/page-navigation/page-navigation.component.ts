@@ -13,7 +13,8 @@ import { CommunicationService } from '../../services/communication/communication
 
 export class PageNavigationComponent implements OnInit {
   private communicationService: CommunicationService;
-  @Input() page: Page<Task>;
+  //@Input() page: Page<Task>;
+  private page: Page<Task>;
   @Input() maxNumber: number = 0;
   @Output() nextPageEvent = new EventEmitter();
   @Output() previousPageEvent = new EventEmitter();
@@ -111,7 +112,7 @@ export class PageNavigationComponent implements OnInit {
     console.log("numb " + this.page.numberOfElements);
     let current: number;
       if (numbOfElements < pageSize) {
-        this.currentNumberOfLastRow = parseInt(totalElements);
+        this.currentNumberOfLastRow = totalElements;
         return;
       }
       if (this.page.first == undefined || pageNumber == 0) {
@@ -121,7 +122,7 @@ export class PageNavigationComponent implements OnInit {
         current = totalElements;
         console.log("ELSE total is " + current);
       } else if (pageNumber < 2) {
-        current = parseInt(currentFirst) + parseInt(pageSize) - 1;
+        current = currentFirst + pageSize - 1;
         console.log("ELSE if < 2 is " + current + " - " + currentFirst + " - " + pageSize);
       } else {
         current = currentFirst - 1 + pageSize;
@@ -129,6 +130,4 @@ export class PageNavigationComponent implements OnInit {
         }
         this.currentNumberOfLastRow = current;
     }
-
-
 }

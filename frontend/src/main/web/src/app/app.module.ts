@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { DatePipe } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +16,8 @@ import { PageNavigationComponent } from './components/page-navigation/page-navig
 import { DateFormat } from './components/utils/date-format/dateFormat'
 
 import { CommunicationService } from './services/communication/communication.service';
+import { DoneMessageRender } from './components/done-message-render/done-message-render.component';
+import { DeleteCellRender } from './components/delete-cell-render/delete-cell-render.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +28,16 @@ import { CommunicationService } from './services/communication/communication.ser
     AddTaskComponent,
     ShowLimitedTasksComponent,
     PageNavigationComponent,
-    DateFormat
+    DateFormat,
+    DoneMessageRender,
+    DeleteCellRender
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AgGridModule.withComponents([DoneMessageRender, DeleteCellRender])
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent]

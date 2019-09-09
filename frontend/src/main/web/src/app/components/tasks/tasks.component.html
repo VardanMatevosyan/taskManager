@@ -1,4 +1,5 @@
 
+
 <div id="headPagination" class="row justify-content-between" width="100%">
   <div class="col-xs-auto col-sm-auto col-md-auto">
     <app-add-task (addTask)="addTask($event)"></app-add-task>
@@ -10,42 +11,56 @@
 </div>
 
 <div class="row justify-content-sm-center ">
-<table id="tasksTable" class="table table-bordered table-sm " >
-  <thead class="thead-dark">
-    <tr>
-      <th >Id</th>
-      <th>Create date</th>
-      <th>Description</th>
-      <th>Done</th>
-      <th>Trash</th>
-    </tr>
-  </thead>
+<!--<table id="tasksTable" class="table table-bordered table-sm " >-->
+  <!--<thead class="thead-dark">-->
+    <!--<tr>-->
+      <!--<th >Id</th>-->
+      <!--<th>Create date</th>-->
+      <!--<th>Description</th>-->
+      <!--<th>Done</th>-->
+      <!--<th>Trash</th>-->
+    <!--</tr>-->
+  <!--</thead>-->
 
-  <tbody>
-      <tr app-task
-          *ngFor="let task of filteredTasks"
-          [task]="task"
-          (tasksEE)="deleteTask($event)"
-          [ngClass]="{'table-success' : task.done, 'table-danger' : !task.done}"
-      >
-      </tr>
-  </tbody>
+  <ag-grid-angular
+    style = "width: 900px; height: 750px; padding-top: 10px;"
+    class = "ag-theme-balham"
+    [columnDefs] = "colmDef"
+    [animateRows] = "true"
+    [enableColResize] = "true"
+    [rowDragManaged] = "true"
+    (gridReady) = "onGridReady($event)"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData"
+    [context]="context"
+    [frameworkComponents]="frameworkComponents"
 
-  <tfoot class="thead-dark">
-  <tr>
-    <th>Id</th>
-    <th>Create date</th>
-    <th>Description</th>
-    <th>Done</th>
-    <th>Trash</th>
-  </tr>
-  </tfoot>
-</table>
+  ></ag-grid-angular>
+
+  <!--<tbody>-->
+      <!--<tr app-task-->
+          <!--*ngFor="let task of filteredTasks"-->
+          <!--[task]="task"-->
+          <!--(tasksEE)="deleteTask($event)"-->
+          <!--[ngClass]="{'table-success' : task.done, 'table-danger' : !task.done}"-->
+      <!--&gt;-->
+      <!--</tr>-->
+  <!--</tbody>-->
+
+  <!--<tfoot class="thead-dark">-->
+  <!--<tr>-->
+    <!--<th>Id</th>-->
+    <!--<th>Create date</th>-->
+    <!--<th>Description</th>-->
+    <!--<th>Done</th>-->
+    <!--<th>Trash</th>-->
+  <!--</tr>-->
+  <!--</tfoot>-->
+<!--</table>-->
 </div>
 <div app-page-navigation
      class="row  justify-content-between"
      [maxNumber]="3"
-     [page] = "page"
      (nextPageEvent)="getNextPage()"
      (previousPageEvent)="getPreviousPage()"
      (customPageEvent)="getCustomPage($event)"
