@@ -18,6 +18,7 @@ import { DateFormat } from './components/utils/date-format/dateFormat'
 import { CommunicationService } from './services/communication/communication.service';
 import { DoneMessageRender } from './components/done-message-render/done-message-render.component';
 import { DeleteCellRender } from './components/delete-cell-render/delete-cell-render.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DeleteCellRender } from './components/delete-cell-render/delete-cell-re
     PageNavigationComponent,
     DateFormat,
     DoneMessageRender,
-    DeleteCellRender
+    DeleteCellRender,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

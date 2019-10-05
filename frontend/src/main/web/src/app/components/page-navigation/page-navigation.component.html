@@ -1,10 +1,16 @@
-  
-  	<div class="col-auto">
+<div class="container">
+<div class="row justify-content-around">
+
+  <div class="col-3">
+  	<div id="page_info">
   		<div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">
  			 Showes {{currentNumberOfFirstRow}} - {{currentNumberOfLastRow}} of {{page.totalElements}}
   		</div>
   	</div>
-  	<div class="col-auto">
+  </div>
+
+  <div class="col-3">
+  	<div id="page_links">
   		<div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
   			<ul class="pagination">
           <li class="paginate_button page-item next" [ngClass]="getClassForFirstPageLink()" id="firstPage">
@@ -25,3 +31,6 @@
   			</ul>
   		</div>
   	</div>
+</div>
+</div>
+</div>

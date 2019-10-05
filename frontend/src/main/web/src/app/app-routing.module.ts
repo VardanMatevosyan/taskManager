@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TasksComponent } from './components/tasks/tasks.component';
-import { TaskComponent } from './components/task/task.component';
-import { AddTaskComponent } from './components/add-task/add-task.component';
+import {ProfileComponent} from "./components/profile/profile.component";
 
 const routes: Routes = [
+{path: '' , component: TasksComponent},
 {path: 'tasks' , component: TasksComponent},
-{path: 'tasks/update' , component: TaskComponent},
-{path: 'tasks/save' , component: AddTaskComponent}
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

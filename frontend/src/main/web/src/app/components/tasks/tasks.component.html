@@ -1,69 +1,39 @@
-
-
-<div id="headPagination" class="row justify-content-between" width="100%">
-  <div class="col-xs-auto col-sm-auto col-md-auto">
-    <app-add-task (addTask)="addTask($event)"></app-add-task>
-    <app-show-limited-tasks
-      (pageSizeEvent)="refreshPageWithNewPageSize($event)"
-      class="col-xs-auto col-sm-auto col-md-auto"></app-show-limited-tasks>
+<div class="row justify-content-center" width="850px">
+  <div id="headPagination" class="col-9" width="600px">
+      <app-add-task (addTask)="addTask($event)"></app-add-task>
+      <app-show-limited-tasks
+        (pageSizeEvent)="refreshPageWithNewPageSize($event)"
+        class="col-xs-auto col-sm-auto col-md-auto"></app-show-limited-tasks>
   </div>
-   <app-search (allFieldsCriteriaEvent)="search($event)"></app-search>
+  <div class="w-100"></div>
+  <div class="col-9">
+    <ag-grid-angular
+      style = "width: 850px; height: 600px; padding-top: 10px;"
+      class = "ag-theme-balham"
+      [columnDefs] = "colmDef"
+      [animateRows] = "true"
+      [enableColResize] = "true"
+      [rowDragManaged] = "true"
+      (gridReady) = "onGridReady($event)"
+      [defaultColDef]="defaultColDef"
+      [rowData]="rowData"
+      [context]="context"
+      [frameworkComponents]="frameworkComponents"
+
+    ></ag-grid-angular>
+  </div>
+  <div class="w-100"></div>
 </div>
 
-<div class="row justify-content-sm-center ">
-<!--<table id="tasksTable" class="table table-bordered table-sm " >-->
-  <!--<thead class="thead-dark">-->
-    <!--<tr>-->
-      <!--<th >Id</th>-->
-      <!--<th>Create date</th>-->
-      <!--<th>Description</th>-->
-      <!--<th>Done</th>-->
-      <!--<th>Trash</th>-->
-    <!--</tr>-->
-  <!--</thead>-->
-
-  <ag-grid-angular
-    style = "width: 900px; height: 750px; padding-top: 10px;"
-    class = "ag-theme-balham"
-    [columnDefs] = "colmDef"
-    [animateRows] = "true"
-    [enableColResize] = "true"
-    [rowDragManaged] = "true"
-    (gridReady) = "onGridReady($event)"
-    [defaultColDef]="defaultColDef"
-    [rowData]="rowData"
-    [context]="context"
-    [frameworkComponents]="frameworkComponents"
-
-  ></ag-grid-angular>
-
-  <!--<tbody>-->
-      <!--<tr app-task-->
-          <!--*ngFor="let task of filteredTasks"-->
-          <!--[task]="task"-->
-          <!--(tasksEE)="deleteTask($event)"-->
-          <!--[ngClass]="{'table-success' : task.done, 'table-danger' : !task.done}"-->
-      <!--&gt;-->
-      <!--</tr>-->
-  <!--</tbody>-->
-
-  <!--<tfoot class="thead-dark">-->
-  <!--<tr>-->
-    <!--<th>Id</th>-->
-    <!--<th>Create date</th>-->
-    <!--<th>Description</th>-->
-    <!--<th>Done</th>-->
-    <!--<th>Trash</th>-->
-  <!--</tr>-->
-  <!--</tfoot>-->
-<!--</table>-->
-</div>
 <div app-page-navigation
-     class="row  justify-content-between"
+     style="margin-top: 10px"
      [maxNumber]="3"
      (nextPageEvent)="getNextPage()"
      (previousPageEvent)="getPreviousPage()"
      (customPageEvent)="getCustomPage($event)"
 >
 </div>
-<!--(pageSizeEvent)="getUpdatedPageSize($event)"-->
+
+
+
+

@@ -1,13 +1,12 @@
-<div class="container" text-align="justify">
-  <app-tasks></app-tasks>
-
+<div class="container">
+  <div id="columnNav" class="col bg-dark">
+  <nav>
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
+  </nav>
+    </div>
 </div>
-<!--<ag-grid-angular-->
-  <!--style = "width: 900px; height: 750px; padding-top: 10px;"-->
-  <!--class = "ag-theme-balham"-->
-  <!--[columnDefs] = "colmDef"-->
-  <!--[animateRows] = "true"-->
-  <!--[enableColResize] = "true"-->
-  <!--[rowDragManaged] = "true"-->
-  <!--(gridReady) = "onGridReady($event)"-->
-<!--&gt;</ag-grid-angular>-->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
