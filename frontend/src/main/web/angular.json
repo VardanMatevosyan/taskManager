@@ -27,7 +27,9 @@
               "./node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "./node_modules/ag-grid-community/dist/styles/ag-theme-balham.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

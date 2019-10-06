@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { DatePipe } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MaterialModule } from './modules/material/material.module'
+// import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,7 +41,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AgGridModule.withComponents([DoneMessageRender, DeleteCellRender])
+    AgGridModule.withComponents([DoneMessageRender, DeleteCellRender]),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent]
