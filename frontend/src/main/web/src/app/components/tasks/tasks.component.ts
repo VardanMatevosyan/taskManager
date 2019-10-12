@@ -3,10 +3,10 @@ import { HttpClientService } from '../../service/http-client.service';
 import { PaginationService } from '../../services/pagination/pagination.service';
 import {Task} from '../../models/Task'
 import {Page} from '../../models/pagination/page'
-import { Pageable } from '../../models/pagination/pageable';
 import { CommunicationService } from '../../services/communication/communication.service';
 import { DoneMessageRender } from '../done-message-render/done-message-render.component';
 import { DeleteCellRender } from '../delete-cell-render/delete-cell-render.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tasks',
@@ -59,6 +59,9 @@ export class TasksComponent implements OnInit {
             headerName: "Create date",
             field: "createDate",
             width: 200,
+            valueFormatter: function(params) {
+              return moment(params.value).format("D MMM YYYY HH:mm");
+            },
             sortable: true,
             filter: "agDateColumnFilter",
             filterParams: {
@@ -109,7 +112,7 @@ export class TasksComponent implements OnInit {
           this.context = { componentParent: this };
               this.frameworkComponents = {
                 doneMessageRenderer: DoneMessageRender,
-                deleteCellRender: DeleteCellRender
+                deleteCellRender: DeleteCellRender,
               };
 
   }
@@ -126,15 +129,12 @@ export class TasksComponent implements OnInit {
       this.tasks = response['content'];
       this.filteredTasks = this.tasks;
       this.communicationService.updatedPage(this.page);
-      console.log('%c TASKS', "color: green;")
+      console.log('%c TASKS', "color: green;");
       console.table(this.tasks);
       this.rowData = this.tasks;
-      // this.gridApis.setRowData(this.rowData);
-
     }
 
    public getCustomPage(pageNumber: number): void {
-   console.log(pageNumber);
       this.page.pageable = this.paginationService.getCustomPage(this.page, pageNumber);
       this.getData();
    }
@@ -164,7 +164,6 @@ export class TasksComponent implements OnInit {
       response => this.handleSuccess(response)
     );
 
-    console.log('%c Add new TASK', "color: green;")
     console.table(task);
   }
 
@@ -211,10 +210,6 @@ export class TasksComponent implements OnInit {
       this.gridColumnsApi = params.columnApi;
       params.api.setRowData(this.tasks);
     }
-
-
-
-
 
   updateTask(task: Task) {
     task.done = !task.done;

@@ -5,8 +5,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './modules/material/material.module'
 
-// import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,7 +36,7 @@ import { MenuComponent } from './components/menu/menu.component';
     DoneMessageRender,
     DeleteCellRender,
     ProfileComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
