@@ -1,17 +1,12 @@
-<div class="container">
-<div class="row justify-content-around">
-
-  <div class="col-3">
+<div class="paginationContainer" fxLayout="row">
+  <div  fxFlex="50%" fxFlexAlign="start">
   	<div id="page_info">
-  		<div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">
  			 Showes {{currentNumberOfFirstRow}} - {{currentNumberOfLastRow}} of {{page.totalElements}}
-  		</div>
   	</div>
   </div>
 
-  <div class="col-3">
-  	<div id="page_links">
-  		<div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
+  <div  fxFlex="50%" fxLayoutAlign="end">
+  		<div>
   			<ul class="pagination">
           <li class="paginate_button page-item next" [ngClass]="getClassForFirstPageLink()" id="firstPage">
             <a [routerLink]="" (click)="getCustomPage(1)" class="page-link">First</a>
@@ -30,7 +25,5 @@
           </li>
   			</ul>
   		</div>
-  	</div>
-</div>
-</div>
+  </div>
 </div>

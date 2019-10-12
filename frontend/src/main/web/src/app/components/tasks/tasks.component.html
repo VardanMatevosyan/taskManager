@@ -1,4 +1,4 @@
-<div class="row justify-content-center" width="850px">
+<div  width="850px">
   <div id="headPagination" class="col-9" width="600px">
       <app-add-task (addTask)="addTask($event)"></app-add-task>
       <app-show-limited-tasks
@@ -6,7 +6,7 @@
         class="col-xs-auto col-sm-auto col-md-auto"></app-show-limited-tasks>
   </div>
   <div class="w-100"></div>
-  <div class="col-9">
+  <div>
     <ag-grid-angular
       style = "width: 850px; height: 600px; padding-top: 10px;"
       class = "ag-theme-balham"
@@ -33,7 +33,6 @@
      (customPageEvent)="getCustomPage($event)"
 >
 </div>
-
 
 
 

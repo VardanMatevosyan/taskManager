@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms'
 import { AgGridModule } from 'ag-grid-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './modules/material/material.module'
+
 // import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './components/task/task.component';
 import { TasksComponent } from './components/tasks/tasks.component';
@@ -21,6 +23,7 @@ import { CommunicationService } from './services/communication/communication.ser
 import { DoneMessageRender } from './components/done-message-render/done-message-render.component';
 import { DeleteCellRender } from './components/delete-cell-render/delete-cell-render.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     DateFormat,
     DoneMessageRender,
     DeleteCellRender,
-    ProfileComponent
+    ProfileComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     FormsModule,
     AgGridModule.withComponents([DoneMessageRender, DeleteCellRender]),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule.withConfig({
+      useColumnBasisZero: false,
+      printWithBreakpoints: ['md', 'lt-lg', 'lt-xl', 'gt-sm', 'gt-xs']
+    }),
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent]

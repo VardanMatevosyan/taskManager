@@ -1,12 +1,9 @@
-<div class="container">
-  <div id="columnNav" class="col bg-dark">
-  <nav>
-    <a routerLink="/profile" routerLinkActive="active">Profile</a>
-    <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
-  </nav>
-    </div>
-</div>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<div fxLayout="column">
+  <div fxLayoutAlign="center">
+    <app-menu></app-menu>
+  </div>
+  <div fxLayoutAlign="center">
+    <router-outlet></router-outlet>
+  </div>
 
+</div>
