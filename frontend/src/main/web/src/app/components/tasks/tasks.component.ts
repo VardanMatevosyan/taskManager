@@ -169,6 +169,8 @@ export class TasksComponent implements OnInit {
 
   private handleSuccess(response: Task) {
     this.tasks.push(response);
+    this.getData();
+    this.rowData = this.tasks;
     this.clearDescriptionInput();
   }
 

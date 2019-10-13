@@ -50,8 +50,7 @@ export class PaginationService {
       let url = this.tasksUrl
       + '?page=' + pageable.pageNumber
       + '&size=' + pageable.pageSize
-      + '&sort=id';
-      console.log("URL is " + url);
+      + '&sort=description';
       return this.http.get<Page<Task>>(url, httpOptions);
     }
 
