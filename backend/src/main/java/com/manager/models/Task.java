@@ -15,12 +15,12 @@ import java.util.Objects;
  */
 
 @Component
-@Entity(name = "task")
+@Entity(name = "Task")
 @Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column(name = "description")
     private String description;
@@ -30,6 +30,22 @@ public class Task {
 
     @Column(name = "done")
     private boolean done;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     /**
      * Default constructor.
@@ -44,7 +60,7 @@ public class Task {
      * @param done task done.
      */
 
-    public Task(final String id, final String description, final Boolean done) {
+    public Task(final Integer id, final String description, final Boolean done) {
         this.id = id;
         this.description = description;
         this.createDate = new Timestamp(System.currentTimeMillis());
@@ -56,7 +72,7 @@ public class Task {
      * @return task id.
      */
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -90,7 +106,7 @@ public class Task {
      * @param id task id.
      */
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

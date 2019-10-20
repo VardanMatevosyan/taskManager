@@ -31,7 +31,7 @@ public class TaskService {
         return this.taskRepository.save(task);
     }
 
-    public void deleteTask(String id) {
+    public void deleteTask(Integer id) {
         this.taskRepository.deleteById(id);
     }
 
