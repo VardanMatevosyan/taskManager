@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { AgGridModule } from 'ag-grid-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from './modules/material/material.module'
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './components/task/task.component';
@@ -22,6 +22,12 @@ import { DoneMessageRender } from './components/done-message-render/done-message
 import { DeleteCellRender } from './components/delete-cell-render/delete-cell-render.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './components/login/login.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { ListUserComponent } from './components/list-user/list-user.component';
+import { UserService } from "./services/user/user.service";
+import {TokenInterceptor} from "./interseptors/tokenInterceptor";
 
 @NgModule({
   declarations: [
@@ -37,12 +43,17 @@ import { MenuComponent } from './components/menu/menu.component';
     DeleteCellRender,
     ProfileComponent,
     MenuComponent,
+    LoginComponent,
+    AddUserComponent,
+    EditUserComponent,
+    ListUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AgGridModule.withComponents([DoneMessageRender, DeleteCellRender]),
     BrowserAnimationsModule,
     MaterialModule,
@@ -51,7 +62,9 @@ import { MenuComponent } from './components/menu/menu.component';
       printWithBreakpoints: ['md', 'lt-lg', 'lt-xl', 'gt-sm', 'gt-xs']
     }),
   ],
-  providers: [CommunicationService],
+  providers: [CommunicationService, UserService, {provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
