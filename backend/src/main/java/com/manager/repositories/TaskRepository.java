@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource(collectionResourceRel = "tasks", path = "tasks")
-@CrossOrigin(origins = "http://localhost:4200")
+@Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
 }

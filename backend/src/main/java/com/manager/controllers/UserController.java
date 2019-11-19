@@ -1,14 +1,20 @@
 package com.manager.controllers;
 
 
+import com.manager.configuration.security.CurrentUser;
+import com.manager.configuration.security.UserPrincipal;
+import com.manager.configuration.security.exceptions.ResourceNotFoundException;
 import com.manager.models.User;
 import com.manager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,8 +30,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return userService.findUserById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    }
+
     @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/users")
     public List<User> listUser() {
         return userService.findAll();
     }
@@ -54,6 +67,11 @@ public class UserController {
     @DeleteMapping(value = "/user/{id}")
     public void delete(@PathVariable(value = "id") Integer id) {
         userService.delete(id);
+    }
+
+    @RequestMapping("/userInfo")
+    public Principal user(Principal user) {
+        return user;
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 @Repository
-@CrossOrigin(origins = "http://localhost:4200")
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
+    Boolean existsByEmail(String email);
 }

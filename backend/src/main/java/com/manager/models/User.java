@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 /**
@@ -16,24 +19,29 @@ import java.util.List;
 
 @Component
 @Entity(name = "User")
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "first_Name")
+    @Column(name = "first_Name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_Name")
+    @Column(name = "last_Name", nullable = false)
     private String lastName;
 
-    @Column(name = "user_Name")
+    @Column(name = "user_Name", nullable = false)
     private String userName;
 
-    @Column
+    @Email
+    @Column(nullable = false)
     private String email;
+
+    private String imageUrl;
 
     @Column(name = "password")
     @JsonIgnore
@@ -56,6 +64,36 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_profile_id", referencedColumnName = "id")
     private UserProfile userProfile;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+    private String providerId;
+
+    public AuthProvider getProvider() {
+        return provider;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
 
     public String getUserName() {
         return userName;
