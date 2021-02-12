@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Page } from '../../models/pagination/page';
-import { Task } from '../../models/Task';
-import { PaginationService } from '../../services/pagination/pagination.service';
+import {PaginationService} from '../../../../services/pagination/pagination.service';
 
 @Component({
   selector: 'app-show-limited-tasks',
@@ -28,7 +26,7 @@ export class ShowLimitedTasksComponent implements OnInit {
 
   public changePageSize(size: number): void {
    this.pageSizeEvent.emit(size);
-   console.log("COM in Show");
+   console.log('COM in Show');
   }
 
 }

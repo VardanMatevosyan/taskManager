@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpClientService } from '../../service/http-client.service';
-import {Task} from '../../models/Task'
+import { Task } from 'src/app/models/task';
+import {HttpClientService} from '../../../../service/http-client.service';
 
 @Component({
   selector: '[app-task]',
@@ -12,23 +12,22 @@ export class TaskComponent implements OnInit {
 	@Output() tasksEE: EventEmitter<Task> = new EventEmitter();
 
   constructor(
-	private httpClientService: HttpClientService
-  ) { }
+    private httpClientService: HttpClientService) { }
 
   ngOnInit() {
   }
 
     setClasses() {
-    let classes = {
+    const classes = {
     'line_through_when_completed' : this.task.done,
     'text-align' : 'justify'
-    }
+    };
     return classes;
   }
 
   onToggle(task: Task) {
- 	let taskToUpdate: Task = task;
- 	taskToUpdate.done = !task.done;;
+ 	const taskToUpdate: Task = task;
+ 	taskToUpdate.done = !task.done;
 
   	this.httpClientService.updateTask(taskToUpdate).subscribe(
   		response => this.handleSuccessfullResponse(response),
@@ -37,7 +36,7 @@ export class TaskComponent implements OnInit {
 
   handleSuccessfullResponse(response) {
   this.task.done = response.done;
-  console.log('%c TASK update', "color: green;")
+  console.log('%c TASK update', 'color: green;')
   console.table(this.task);
   }
 

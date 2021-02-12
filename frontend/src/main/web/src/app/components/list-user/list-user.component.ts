@@ -15,7 +15,7 @@ export class ListUserComponent implements OnInit {
   constructor(private router: Router, private apiService: UserService) { }
 
   ngOnInit() {
-    if(!window.sessionStorage.getItem('token')) {
+    if(!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
     }

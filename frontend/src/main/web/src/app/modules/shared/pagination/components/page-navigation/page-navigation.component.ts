@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Page } from '../../models/pagination/page';
-import { Pageable } from '../../models/pagination/pageable';
-import { Task } from '../../models/Task';
-import {PaginationService} from '../../services/pagination/pagination.service';
-import { CommunicationService } from '../../services/communication/communication.service';
+import {CommunicationService} from '../../../../../services/communication/communication.service';
+import {Page} from '../../../../../models/pagination/page';
+import { Task } from '../../../../../models/Task';
+import {PaginationService} from '../../../../../services/pagination/pagination.service';
+import {Pageable} from '../../../../../models/pagination/pageable';
 
 @Component({
   selector: '[app-page-navigation]',
@@ -13,12 +13,12 @@ import { CommunicationService } from '../../services/communication/communication
 
 export class PageNavigationComponent implements OnInit {
   private communicationService: CommunicationService;
-  //@Input() page: Page<Task>;
+  // @Input() page: Page<Task>;
   private page: Page<Task>;
   @Input() maxNumber: number = 0;
   @Output() nextPageEvent = new EventEmitter();
   @Output() previousPageEvent = new EventEmitter();
-  //@Output() pageSizeEvent: EventEmitter<number> = new EventEmitter<number>();
+  // @Output() pageSizeEvent: EventEmitter<number> = new EventEmitter<number>();
   @Output() customPageEvent: EventEmitter<number> = new EventEmitter<number>();
   private currentNumberOfFirstRow: number;
   private currentNumberOfLastRow: number;
@@ -40,8 +40,8 @@ export class PageNavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-      //this.getNumberOfTheFirstElementOfThePage();
-      //this.getNumberOfTheLastElementOfThePage();
+      // this.getNumberOfTheFirstElementOfThePage();
+      // this.getNumberOfTheLastElementOfThePage();
   }
 
   nextPage() {
@@ -61,18 +61,18 @@ export class PageNavigationComponent implements OnInit {
 
  // updatePageSize(pageSize: number) {
    // this.pageSizeEvent.emit(pageSize);
-  //}
+  // }
 
   getClassForFirstPageLink() {
     let classes = {
-      "disabled": this.page != undefined ? this.page.first : false,
+      'disabled': this.page != undefined ? this.page.first : false,
     };
     return classes;
   }
 
   getClassForLastPageLink() {
     let classes = {
-      "disabled": this.page != undefined ? this.page.last : false
+      'disabled': this.page != undefined ? this.page.last : false
     };
     return classes;
   }
@@ -80,7 +80,7 @@ export class PageNavigationComponent implements OnInit {
   getActivePage(pageNumber: number) {
     let currentNumber = this.page != undefined ? this.page.pageable.pageNumber + 1 : 0;
     return {
-      "active" : currentNumber == pageNumber
+      'active' : currentNumber == pageNumber
     };
   }
 
@@ -101,15 +101,15 @@ export class PageNavigationComponent implements OnInit {
   }
 
     getNumberOfTheLastElementOfThePage() {
-    //console.log("this.page.pageable.pageSize is "+ this.page.pageable.pageSize);
-    //console.log("this.page.size is " + this.page.size);
+    // console.log('this.page.pageable.pageSize is '+ this.page.pageable.pageSize);
+    // console.log('this.page.size is ' + this.page.size);
 
     let currentFirst: number = this.currentNumberOfFirstRow;
     let pageSize: number = this.page.pageable.pageSize;
     let pageNumber: number = this.page.pageable.pageNumber;
     let totalElements: number = this.page.totalElements;
     let numbOfElements: number = this.page.numberOfElements;
-    console.log("numb " + this.page.numberOfElements);
+    console.log('numb ' + this.page.numberOfElements);
     let current: number;
       if (numbOfElements < pageSize) {
         this.currentNumberOfLastRow = totalElements;
@@ -117,16 +117,16 @@ export class PageNavigationComponent implements OnInit {
       }
       if (this.page.first == undefined || pageNumber == 0) {
         current = pageSize;
-        console.log("if is " + current + " - " + pageSize);
+        console.log('if is ' + current + ' - ' + pageSize);
       } else if (pageSize * (pageNumber == 0 ? 1 : pageNumber ) == totalElements) {
         current = totalElements;
-        console.log("ELSE total is " + current);
+        console.log('ELSE total is ' + current);
       } else if (pageNumber < 2) {
         current = currentFirst + pageSize - 1;
-        console.log("ELSE if < 2 is " + current + " - " + currentFirst + " - " + pageSize);
+        console.log('ELSE if < 2 is ' + current + ' - ' + currentFirst + ' - ' + pageSize);
       } else {
         current = currentFirst - 1 + pageSize;
-        console.log("ELSE is " + current);
+        console.log('ELSE is ' + current);
         }
         this.currentNumberOfLastRow = current;
     }

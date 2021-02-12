@@ -10,7 +10,7 @@ import { Pageable } from '../../models/pagination/pageable';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-//const API_URL = environment.apiUrl;
+// const API_URL = environment.apiUrl;
 const API_URL = '//localhost:8080';
 @Injectable({
   providedIn: 'root'

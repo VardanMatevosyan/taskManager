@@ -1,6 +1,8 @@
 package com.manager.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -28,16 +30,18 @@ public class Task {
     @Column(name = "create_date")
     private Timestamp createDate;
 
-    @Column(name = "done")
-    private boolean done;
+//    @Type(type = "com.manager.utils.CustomBooleanType")
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean done;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public boolean isDone() {
-        return done;
-    }
+//    public boolean isDone() {
+//        return done;
+//    }
 
     public User getUser() {
         return user;
@@ -64,6 +68,7 @@ public class Task {
         this.id = id;
         this.description = description;
         this.createDate = new Timestamp(System.currentTimeMillis());
+        this.done = done;
     }
 
 
@@ -96,7 +101,7 @@ public class Task {
      * Getter for task done.
      * @return task done.
      */
-    public boolean getDone() {
+    public Boolean getDone() {
         return done;
     }
 
@@ -130,7 +135,7 @@ public class Task {
      * Setter for task done.
      * @param done task done.
      */
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         this.done = done;
     }
 

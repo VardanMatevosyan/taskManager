@@ -2,6 +2,7 @@ package com.manager.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -28,10 +29,10 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "first_Name", nullable = false)
+    @Column(name = "first_Name")
     private String firstName;
 
-    @Column(name = "last_Name", nullable = false)
+    @Column(name = "last_Name")
     private String lastName;
 
     @Column(name = "user_Name", nullable = false)
@@ -43,7 +44,6 @@ public class User {
 
     private String imageUrl;
 
-    @Column(name = "password")
     @JsonIgnore
     private String password;
 
@@ -55,8 +55,8 @@ public class User {
     )
     private List<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "task_id")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private List<Task> tasks;
 
 
@@ -65,7 +65,7 @@ public class User {
     @JoinColumn(name="user_profile_id", referencedColumnName = "id")
     private UserProfile userProfile;
 
-    @NotNull
+//    @NotNull
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 

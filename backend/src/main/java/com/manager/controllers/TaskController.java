@@ -5,13 +5,14 @@ import com.manager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/tasks")
 public class TaskController {
@@ -25,7 +26,7 @@ public class TaskController {
     @GetMapping(produces = "application/json")
     @ResponseBody
     public Page<Task> getTasks(@RequestParam final String page, @RequestParam final String size, @RequestParam final String sort) {
-        return this.taskService.getAll(Integer.valueOf(page), Integer.valueOf(size), sort);
+        return this.taskService.getAll(Integer.parseInt(page), Integer.parseInt(size), sort);
     }
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
