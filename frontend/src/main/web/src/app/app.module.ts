@@ -1,18 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import { AgGridModule } from 'ag-grid-angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MaterialModule } from './modules/material/material.module'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './modules/material/material.module';
 import {MatCardModule} from '@angular/material/card';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
-import { DateFormat } from './components/utils/date-format/dateFormat'
-
 import { CommunicationService } from './services/communication/communication.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -30,12 +26,6 @@ import {TasksModule} from './modules/tasks/tasks-module';
   declarations: [
     AppComponent,
     SearchComponent,
-    // AddTaskComponent,
-    // ShowLimitedTasksComponent,
-    // PageNavigationComponent,
-    DateFormat,
-    // DoneMessageRender,
-    // DeleteCellRender,
     ProfileComponent,
     MenuComponent,
     AddUserComponent,
@@ -50,7 +40,6 @@ import {TasksModule} from './modules/tasks/tasks-module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // AgGridModule.withComponents([DoneMessageRender, DeleteCellRender]),
     BrowserAnimationsModule,
     MaterialModule,
     MatCardModule,
