@@ -1,8 +1,10 @@
-<div class="row">
-
-  <div class="col-md-6 login-container">
-    <h2 style="margin: auto">Login </h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="login-box">
+<mat-card>
+  <mat-card-content>
+  <div fxLayout="row">
+    <div>
+    <h2>Login </h2>
+    <form [formGroup]="loginForm">
       <div class="form-group">
         <label for="username">UserName:</label>
         <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off">
@@ -18,5 +20,23 @@
         <div>Invalid credentials.</div>
       </div>
     </form>
+    </div>
   </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div fxLayout="row" fxLayoutAlign="space-around end">
+      <div>
+        <a class="btn btn-block btn-social-icon btn-google" href='http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect' >
+          <span class="fa fa-google fa-2x"></span>
+        </a>
+      </div>
+      <div>
+        <a class="btn btn-block btn-social-icon btn-facebook" href='http://localhost:8080/oauth2/authorize/facebook?redirect_uri=http://localhost:4200/oauth2/redirect'>
+          <span class="fa fa-facebook fa-2x"></span>
+        </a>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>
 </div>

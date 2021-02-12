@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TasksComponent } from './components/tasks/tasks.component';
-import {ProfileComponent} from "./components/profile/profile.component";
-import {LoginComponent} from "./components/login/login.component";
-import {AddUserComponent} from "./components/add-user/add-user.component";
-import {ListUserComponent} from "./components/list-user/list-user.component";
-import {EditUserComponent} from "./components/edit-user/edit-user.component";
+import {ProfileComponent} from './components/profile/profile.component';
+import {AddUserComponent} from './components/add-user/add-user.component';
+import {ListUserComponent} from './components/list-user/list-user.component';
+import {EditUserComponent} from './components/edit-user/edit-user.component';
+import {AuthGuard} from './modules/auth/auth.guard';
 
 const routes: Routes = [
-  {path: '' , component: LoginComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'list-user', component: ListUserComponent },
-  { path: 'edit-user', component: EditUserComponent },
-  {path: 'tasks' , component: TasksComponent},
-  {path: 'profile', component: ProfileComponent}
+  { path: '' , redirectTo: '/tasks', pathMatch: 'full' },
+  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)},
+
+  { path: 'add-user', canActivate: [AuthGuard], component: AddUserComponent },
+  { path: 'list-user', canActivate: [AuthGuard], component: ListUserComponent },
+  { path: 'edit-user', canActivate: [AuthGuard], component: EditUserComponent },
+
+  // { path: 'tasks' , canActivate: [AuthGuard], component: TasksComponent },
+  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
 ];
 
 @NgModule({

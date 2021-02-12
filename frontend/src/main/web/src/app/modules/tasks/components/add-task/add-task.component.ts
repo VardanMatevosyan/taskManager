@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HttpClientService } from '../../service/http-client.service';
-import {Task} from '../../models/Task';
-import { TasksComponent } from '../tasks/tasks.component';
+import {HttpClientService} from "../../../../service/http-client.service";
+import { Task } from 'src/app/models/task';
+
 
 
 @Component({
@@ -22,7 +22,8 @@ export class AddTaskComponent implements OnInit {
   public onClick(): void {
     let task: Task = new Task();
     task.setDescription(this.description);
-   
+    task.setDone(false);
+
     this.addTask.emit(task);
 
     console.log('%c in onClick Add new TASK', "color: green;")

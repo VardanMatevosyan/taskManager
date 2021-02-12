@@ -6,9 +6,12 @@
 #  port: 9090
   spring:
     datasource:
-      url: jdbc:sqlserver://localhost;databaseName=taskManager?useSSL=false
-      username: vmatevosian
-      password: vmatevosian
+#      url: jdbc:sqlserver://localhost;databaseName=taskManager;useSSL=false
+#      username: vmatevosian
+#      password: vmatevosian
+      url: jdbc:mysql://localhost:3306/lis?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: V9a8r7t6e5q4_MySql_2020
 
     jpa:
       show-sql: true
@@ -17,21 +20,23 @@
         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       properties:
         hibernate:
-          dialect: org.hibernate.dialect.SQLServerDriver
+          dialect: org.hibernate.dialect.MySQL5Dialect
+#          dialect: org.hibernate.dialect.SQLServer2012Dialect
     security:
       oauth2:
         client:
           registration:
-#            google:
-#              clientId: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
-#              clientSecret: tWZKVLxaD_ARWsriiiUFYoIk
-#              redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
-#              scope:
-#                - email
-#                - profile
+            google:
+              clientId: 275334820224-tls25ktsig30k9dm7emoi9j76a05sfa4.apps.googleusercontent.com
+              clientSecret: 9VirkhLmozLTVpeOmR-CiEg3
+              redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+#                - https://www.googleapis.com/auth/userinfo.profile
+                - email
+                - profile
             facebook:
-              clientId: 422768198624262
-              clientSecret: 556e0f3dad7c40efe63e54cc4605bc8f
+              clientId: 2527616600649418
+              clientSecret: e3142a669aacb21a6c1d9ed36dba393e
               redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email
@@ -48,9 +53,15 @@
               authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
               tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
               userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+            google:
+              authorizationUri: https://accounts.google.com/o/oauth2/auth
+              tokenUri: https://accounts.google.com/o/oauth2/token
+              userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
+
   app:
     auth:
-      tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+#      tokenSecret: c08793700e5ca7c1126df6023fba8c12
+      tokenSecret: e3142a669aacb21a6c1d9ed36dba393e
       tokenExpirationMsec: 864000000
     oauth2:
       # After successfully authenticating with the OAuth2 Provider,
@@ -58,6 +69,10 @@
       # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
       # We're not using cookies because they won't work well in mobile clients.
       authorizedRedirectUris:
-        - http://localhost:8080/oauth2/redirect
+        - http://localhost:4200/
         - myandroidapp://oauth2/redirect
         - myiosapp://oauth2/redirect
+#          1	user@user.com	firstUserName	lastUserName	password	userName	1
+#1	MODERATOR
+#2	ADMIN
+#3	USER

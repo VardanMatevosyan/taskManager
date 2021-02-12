@@ -25,6 +25,8 @@ import java.net.URI;
 /**
  * controllers and services for handling email and password based login.
  */
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
