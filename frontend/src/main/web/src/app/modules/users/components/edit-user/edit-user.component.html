@@ -2,6 +2,7 @@
   <h2 class="text-center">Edit User</h2>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <div class="hidden">
+      <label for="id">Id:</label>
       <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
     </div>
     <div class="form-group">
@@ -17,16 +18,6 @@
     <div class="form-group">
       <label for="lastName">Last Name:</label>
       <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
-    </div>
-
-    <div class="form-group">
-      <label for="age">Age:</label>
-      <input type="number" formControlName="age" placeholder="age" name="age" class="form-control" id="age">
-    </div>
-
-    <div class="form-group">
-      <label for="salary">Salary:</label>
-      <input type="number" formControlName="salary" placeholder="salary" name="salary" class="form-control" id="salary">
     </div>
 
     <button class="btn btn-success">Update</button>

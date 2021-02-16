@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/users")
 public class UserController {
     public static final String SUCCESS = "success";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
@@ -31,47 +30,47 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/me")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/users/me")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         Optional<User> userById = userService.findUserById(userPrincipal.getId());
         return userService.findUserById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
-    @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
+//    @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
     @GetMapping(value = "/users")
     public List<User> listUser() {
         return userService.findAll();
     }
 
     @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
-    @PostMapping(value = "/user")
+    @PostMapping(value = "/users")
     public User create(@RequestBody User user) {
         return userService.save(user);
     }
 
     @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "/users/{id}")
     public User findOneUser(@PathVariable Integer id) {
         return userService.findUser(id);
     }
 
     //moder should update any user and user should update only himself
     @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
-    @PutMapping(value = "/user/{id}")
+    @PutMapping(value = "/users/{id}")
     public User update(@PathVariable Integer id, @RequestBody User user) {
         user.setId(id);
         return userService.save(user);
     }
 
     @Secured({ROLE_ADMIN})
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "/users/{id}")
     public void delete(@PathVariable(value = "id") Integer id) {
         userService.delete(id);
     }
 
-    @RequestMapping("/userInfo")
+    @RequestMapping("/users/userInfo")
     public Principal user(Principal user) {
         return user;
     }

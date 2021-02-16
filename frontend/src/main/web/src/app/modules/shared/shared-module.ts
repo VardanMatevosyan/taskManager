@@ -6,10 +6,12 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {DateFormat} from './pipes/date-format/dateFormat';
+import {MenuComponent} from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
     PageNavigationComponent,
+    MenuComponent,
     DateFormat
   ],
   imports: [
@@ -25,6 +27,7 @@ import {DateFormat} from './pipes/date-format/dateFormat';
   ],
   exports: [
     PageNavigationComponent,
+    MenuComponent,
     DateFormat
   ]
 })

@@ -1,0 +1,86 @@
+<mat-list class="profile_list_info" role="list">
+  <div class="row_item">
+    <div class="col_left">
+      <mat-list-item>
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <span>Name</span>
+      </mat-list-item>
+    </div>
+    <div class="col_rigth">
+      <span>{{user.userName}}</span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="row_item">
+    <div class="col_left">
+      <mat-list-item>
+        <mat-icon mat-list-icon>alternate_email</mat-icon>
+        <span>Email</span>
+      </mat-list-item>
+    </div>
+    <div class="col_rigth">
+      <span>{{user.email}}</span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="row_item">
+    <div class="col_left">
+      <mat-list-item>
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span>Address</span>
+      </mat-list-item>
+    </div>
+    <div class="col_rigth">
+      <img src="{{user.imageUrl}}"
+           alt="{{user.userName}}"
+           class="img-responsive"
+           style="max-height: 80px">
+    </div>
+  </div>
+
+<!--  <div class="row_item">-->
+<!--    <div class="col_left">-->
+<!--      <mat-list-item>-->
+<!--        <mat-icon mat-list-icon>home</mat-icon>-->
+<!--        <span>Address</span>-->
+<!--      </mat-list-item>-->
+<!--    </div>-->
+<!--    <div class="col_rigth">-->
+<!--      <img src="{{user.imageUrl}}"-->
+<!--           alt="{{user.userName}}"-->
+<!--           class="img-responsive"-->
+<!--           style="max-height: 80px">-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="row_item">-->
+<!--    <div class="col_left">-->
+<!--      <mat-list-item>-->
+<!--        <mat-icon mat-list-icon>call</mat-icon>-->
+<!--        <span> Number</span>-->
+<!--      </mat-list-item>-->
+<!--    </div>-->
+<!--    <div class="col_rigth">-->
+<!--      <span>{{ user. }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <mat-divider></mat-divider>-->
+
+<!--  <div class="row_item">-->
+<!--    <div class="col_left">-->
+<!--      <mat-list-item>-->
+<!--        <mat-icon mat-list-icon>home</mat-icon>-->
+<!--        <span>Address</span>-->
+<!--      </mat-list-item>-->
+<!--    </div>-->
+<!--    <div class="col_rigth">-->
+<!--      <span>{{ user. }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+</mat-list>

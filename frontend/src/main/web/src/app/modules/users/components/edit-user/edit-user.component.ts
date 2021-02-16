@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../models/User";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {UserService} from "../../services/user/user.service";
-import {first} from "rxjs/operators";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {first} from 'rxjs/operators';
+import {User} from '../../../../models/User';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,13 +14,15 @@ export class EditUserComponent implements OnInit {
 
   user: User;
   editForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: UserService) { }
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private apiService: UserService) { }
 
   ngOnInit() {
-    let userId = window.sessionStorage.getItem("editUserId");
-    if(!userId) {
-      alert("Invalid action.")
-      this.router.navigate(['list-user']);
+    let userId = window.sessionStorage.getItem('editUserId');
+    if (!userId) {
+      alert('Invalid action.');
+      this.router.navigate(['users']);
       return;
     }
     this.editForm = this.formBuilder.group({
@@ -28,13 +30,8 @@ export class EditUserComponent implements OnInit {
       username: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      age: ['', Validators.required],
-      salary: ['', Validators.required]
     });
-    this.apiService.getUserById(+userId)
-      .subscribe( data => {
-        this.editForm.setValue(data);
-      });
+    const id: number = +userId;
   }
 
   onSubmit() {
@@ -43,7 +40,7 @@ export class EditUserComponent implements OnInit {
       .subscribe(
         data => {
           alert('User updated successfully.');
-          this.router.navigate(['list-user']);
+          this.router.navigate(['users']);
         },
         error => {
           alert(error);

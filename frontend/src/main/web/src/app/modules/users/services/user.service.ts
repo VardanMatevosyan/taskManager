@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {User} from "../../models/User";
+import {HttpClient} from '@angular/common/http';
+import {User} from '../../../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8080/users/';
+  baseUrl: string = 'http://localhost:8080/users';
 
   login(loginPayload) {
     const headers = {
@@ -21,11 +20,13 @@ export class UserService {
   }
 
   getUsers() {
-    return this.http.get(this.baseUrl + 'user?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+    // return this.http.get(this.baseUrl + 'user?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+    return this.http.get(this.baseUrl);
   }
 
   getUserById(id: number) {
-    return this.http.get(this.baseUrl + 'user/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+    return this.http.get(this.baseUrl + '?id=' + id);
+    // return this.http.get(this.baseUrl + 'user/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
   createUser(user: User) {

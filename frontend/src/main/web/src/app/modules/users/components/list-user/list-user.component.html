@@ -1,0 +1,45 @@
+<div class="col-md-6 user-container">
+  <h2 style="margin: auto"> User Details</h2>
+  <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Image</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>UserName</th>
+      <th>Email</th>
+      <th>Delete</th>
+      <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        <img src="{{user.imageUrl}}"
+             alt="{{user.userName}}"
+             class="img-responsive"
+             style="max-height: 80px">
+      </td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <i id="trashIcon"
+           (click)="deleteUser(user)"
+           class="fa fa-trash fa-2x"
+           style="color:red; cursor: pointer">
+        </i>
+      </td>
+      <td>
+        <i id="editIcon"
+           (click)="editUser(user)"
+           class="fa fa-edit fa-2x"
+           style="color:dodgerblue; cursor: pointer">
+        </i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

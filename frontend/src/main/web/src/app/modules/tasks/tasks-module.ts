@@ -10,6 +10,7 @@ import {AddTaskComponent} from './components/add-task/add-task.component';
 import {ShowLimitedTasksComponent} from './components/show-limited-tasks/show-limited-tasks.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {AuthGuard} from "../auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -26,8 +27,8 @@ import {CommonModule} from '@angular/common';
     CommonModule,
     AgGridModule.withComponents([DoneMessageRender, DeleteCellRender]),
     RouterModule.forChild([
-      { path: '', component: TasksComponent },
-      { path: 'tasks', component: TasksComponent }
+      { path: '', canActivate: [AuthGuard], component: TasksComponent },
+      { path: 'tasks', canActivate: [AuthGuard], component: TasksComponent }
     ])
   ]
 })
