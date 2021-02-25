@@ -9,7 +9,7 @@
 #      url: jdbc:sqlserver://localhost;databaseName=taskManager;useSSL=false
 #      username: vmatevosian
 #      password: vmatevosian
-      url: jdbc:mysql://localhost:3306/lis?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/lis?useUnicode=true&characterEncoding=utf8&characterResultSets=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       username: root
       password: V9a8r7t6e5q4_MySql_2020
 

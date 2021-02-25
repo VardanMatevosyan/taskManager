@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs-compat/add/operator/filter';
+import {UserAuth} from '../../payload/user-auth';
+import {JwtTokenResponse} from '../../payload/jwt-token-response';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,37 +17,37 @@ export class AuthComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]
     });
-
-//   onSubmit() {
-//     if (this.loginForm.invalid) {
-//       return;
-//     }
-//     const body = new HttpParams()
-//       .set('username', this.loginForm.controls.username.value)
-//       .set('password', this.loginForm.controls.password.value)
-//       .set('grant_type', 'password');
-// console.log(this.loginForm.controls.username.value);
-// console.log(body.toString());
-//     this.apiService.login(body.toString()).subscribe(data => {
-//       // window.sessionStorage.setItem('token', data.toString());
-//       window.localStorage.setItem('token', JSON.stringify(data));
-//       console.log(window.localStorage.getItem('token'));
-//       console.log(data);
-//       this.router.navigate(['list-user']);
-//     }, error => {
-//       alert(error.error.error_description);
-//       alert(body);
-//     });
-//   }
-
   }
 
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const userAuthRequestPayload: UserAuth = {
+      username: this.loginForm.controls.username.value,
+      password: this.loginForm.controls.password.value
+    };
+
+    this.authService.login(userAuthRequestPayload).subscribe(
+      data => {
+        const jwtToken = data as JwtTokenResponse;
+        window.localStorage.setItem('token', jwtToken.accessToken);
+        this.router.navigate(['tasks']);
+        },
+        error => {
+        alert(error.error.error_description);
+        alert(userAuthRequestPayload);
+      });
+  }
 }
 

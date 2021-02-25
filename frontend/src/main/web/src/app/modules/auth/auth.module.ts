@@ -6,6 +6,7 @@ import {AuthComponent} from './components/auth/auth.component';
 import {MaterialModule} from '../material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {Oauth2RedirectHandlerComponent} from './components/oauth2-redirect-handler/oauth2-redirect-handler.component';
+import {AuthService} from './auth.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {Oauth2RedirectHandlerComponent} from './components/oauth2-redirect-handl
       { path: 'auth', component: AuthComponent },
       { path: 'oauth2/redirect', component: Oauth2RedirectHandlerComponent }
     ])
-  ]
+  ],
+  providers: [AuthService]
 })
 export class AuthModule {
 }
