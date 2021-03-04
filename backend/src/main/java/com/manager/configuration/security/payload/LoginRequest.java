@@ -2,7 +2,7 @@ package com.manager.configuration.security.payload;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequest implements AuthRequest {
     @NotBlank
     private String username;
 

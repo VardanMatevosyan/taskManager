@@ -7,7 +7,7 @@ import {User} from '../../../models/User';
 })
 export class UserService {
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:8080/users';
+  baseUrl = 'http://localhost:8080/users/';
 
   getUsers() {
     return this.http.get(this.baseUrl);
@@ -18,14 +18,14 @@ export class UserService {
   }
 
   createUser(user: User) {
-    return this.http.post(this.baseUrl + 'user', user);
+    return this.http.post(this.baseUrl, user);
   }
 
   updateUser(user: User) {
-    return this.http.put(this.baseUrl + 'user/' + user.id, user);
+    return this.http.put(this.baseUrl + user.id, user);
   }
 
   deleteUser(id: number){
-    return this.http.delete(this.baseUrl + 'user/' + id);
+    return this.http.delete(this.baseUrl + id);
   }
 }

@@ -1,0 +1,45 @@
+<div class="login-box">
+  <mat-card>
+    <mat-card-content>
+      <div fxLayout="row">
+        <div>
+          <h2>Registration </h2>
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+              <label for="username">UserName:</label>
+              <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off">
+              <div class="error"
+                   *ngIf="registrationForm.controls['username'].hasError('required') && registrationForm.controls['username'].touched">
+                Username is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" formControlName="email" id="email" autocomplete="off">
+              <div class="error"
+                   *ngIf="registrationForm.controls['email'].hasError('required') && registrationForm.controls['email'].touched">
+                Email is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off">
+              <div class="error"
+                   *ngIf="registrationForm.controls['password'].hasError('required') && registrationForm.controls['password'].touched">
+                Password is required
+              </div>
+            </div>
+
+            <button class="btn btn-success" [disabled]="registrationForm.invalid">Sign up</button>
+            <div *ngIf="invalidLogin" class="error">
+              <div>Invalid credentials.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -3,9 +3,9 @@ package com.manager.configuration.security.payload;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class SignUpRequest {
+public class SignUpRequest implements AuthRequest {
     @NotBlank
-    private String name;
+    private String username;
 
     @NotBlank
     @Email
@@ -14,12 +14,12 @@ public class SignUpRequest {
     @NotBlank
     private String password;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

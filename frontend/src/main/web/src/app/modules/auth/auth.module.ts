@@ -7,11 +7,13 @@ import {MaterialModule} from '../material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {Oauth2RedirectHandlerComponent} from './components/oauth2-redirect-handler/oauth2-redirect-handler.component';
 import {AuthService} from './auth.service';
+import {RegistrationComponent} from './components/auth/registration/registration.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
-    Oauth2RedirectHandlerComponent
+    Oauth2RedirectHandlerComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import {AuthService} from './auth.service';
     }),
     RouterModule.forChild([
       { path: 'auth', component: AuthComponent },
+      { path: 'registration', component: RegistrationComponent },
       { path: 'oauth2/redirect', component: Oauth2RedirectHandlerComponent }
     ])
   ],

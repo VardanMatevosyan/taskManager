@@ -1,7 +1,16 @@
 <div class="menuContainer">
-  <nav>
-    <a routerLink="/profile" routerLinkActive="active">Profile</a>
-    <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
-    <a routerLink="/users" routerLinkActive="active">Users</a>
+  <nav class="navbar">
+    <ul>
+      <li class ="nav navbar-left">
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
+      <a routerLink="/users" routerLinkActive="active">Users</a>
+      </li>
+    </ul>
+    <ul class ="nav navbar-nav navbar-right">
+      <li *ngIf="authService.isAuthenticated()">
+        <a style="cursor: pointer" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
   </nav>
 </div>

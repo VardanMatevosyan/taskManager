@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs-compat/add/operator/filter';
-import {UserAuth} from '../../payload/user-auth';
 import {JwtTokenResponse} from '../../payload/jwt-token-response';
 import {AuthService} from '../../auth.service';
+import {UserAuthLogin} from '../../payload/user-auth-login';
 
 @Component({
   selector: 'app-auth',
@@ -33,7 +33,7 @@ export class AuthComponent implements OnInit {
       return;
     }
 
-    const userAuthRequestPayload: UserAuth = {
+    const userAuthRequestPayload: UserAuthLogin = {
       username: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
     };
@@ -41,13 +41,16 @@ export class AuthComponent implements OnInit {
     this.authService.login(userAuthRequestPayload).subscribe(
       data => {
         const jwtToken = data as JwtTokenResponse;
+        console.log('tt ', jwtToken.accessToken);
+        console.log('jwtToken ', jwtToken);
         window.localStorage.setItem('token', jwtToken.accessToken);
         this.router.navigate(['tasks']);
         },
         error => {
-        alert(error.error.error_description);
-        alert(userAuthRequestPayload);
+          this.invalidLogin = true;
+          alert(error.error);
       });
   }
+
 }
 
