@@ -31,32 +31,31 @@ public class UserController {
     }
 
     @GetMapping("/users/me")
-//    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        Optional<User> userById = userService.findUserById(userPrincipal.getId());
         return userService.findUserById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
-//    @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
+    @Secured({ROLE_ADMIN, ROLE_MODERATOR})
     @GetMapping(value = "/users")
     public List<User> listUser() {
         return userService.findAll();
     }
 
-    @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
+    @Secured({ROLE_ADMIN, ROLE_MODERATOR})
     @PostMapping(value = "/users")
     public User create(@RequestBody User user) {
         return userService.save(user);
     }
 
-    @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
+    @Secured({ROLE_ADMIN, ROLE_MODERATOR})
     @GetMapping(value = "/users/{id}")
     public User findOneUser(@PathVariable Integer id) {
         return userService.findUser(id);
     }
 
-    //moder should update any user and user should update only himself
+    //:todo moder should update any user and user should update only himself
     @Secured({ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER})
     @PutMapping(value = "/users/{id}")
     public User update(@PathVariable Integer id, @RequestBody User user) {

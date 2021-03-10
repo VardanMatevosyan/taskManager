@@ -11,6 +11,7 @@ import com.manager.models.AuthProvider;
 import com.manager.models.Role;
 import com.manager.models.User;
 import com.manager.models.UserProfile;
+import com.manager.repositories.RoleRepository;
 import com.manager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -53,6 +52,9 @@ public class AuthController {
   @Autowired
   private TokenProvider tokenProvider;
 
+  @Autowired
+  private RoleRepository roleRepository;
+
   @PostMapping("/login")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
     String token = handleAuthentication(loginRequest);
@@ -65,8 +67,9 @@ public class AuthController {
       throw new BadRequestException("Email address already in use.");
     }
 
-    Role role = new Role();
-    role.setName("ROLE_USER");
+    Role role = roleRepository.findByName("ROLE_USER");
+    List<Role> roles = new ArrayList<>();
+    roles.add(role);
 
     UserProfile profile = new UserProfile();
     profile.setFirstName("Mock");
@@ -79,7 +82,7 @@ public class AuthController {
     user.setPassword(signUpRequest.getPassword());
     user.setProvider(AuthProvider.local);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    user.setRoles(Arrays.asList(role));
+    user.setRoles(roles);
     user.setUserProfile(profile);
 
     userRepository.saveAndFlush(user);

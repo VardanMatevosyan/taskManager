@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from 'src/app/models/task';
-import {HttpClientService} from '../../../../service/http-client.service';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Task} from 'src/app/models/task';
+import {TaskService} from '../../service/task-service';
 
 @Component({
   selector: '[app-task]',
@@ -8,40 +8,32 @@ import {HttpClientService} from '../../../../service/http-client.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-	@Input() task: Task;
-	@Output() tasksEE: EventEmitter<Task> = new EventEmitter();
+  @Input() task: Task;
+  @Output() tasksEE: EventEmitter<Task> = new EventEmitter();
 
   constructor(
-    private httpClientService: HttpClientService) { }
+    private taskService: TaskService) {
+  }
 
   ngOnInit() {
   }
 
-    setClasses() {
-    const classes = {
-    'line_through_when_completed' : this.task.done,
-    'text-align' : 'justify'
-    };
-    return classes;
-  }
+  onUpdate(task: Task) {
+    console.log('task on toggle ' + task);
+    const taskToUpdate: Task = task;
+    taskToUpdate.done = !task.done;
 
-  onToggle(task: Task) {
- 	const taskToUpdate: Task = task;
- 	taskToUpdate.done = !task.done;
-
-  	this.httpClientService.updateTask(taskToUpdate).subscribe(
-  		response => this.handleSuccessfullResponse(response),
-  	);
+    this.taskService.updateTask(taskToUpdate).subscribe(
+      response => this.handleSuccessfullResponse(response),
+    );
   }
 
   handleSuccessfullResponse(response) {
-  this.task.done = response.done;
-  console.log('%c TASK update', 'color: green;')
-  console.table(this.task);
+    this.task.done = response.done;
+    console.log('%c TASK update', 'color: green;');
   }
 
   onDelete(task: Task) {
-  this.tasksEE.emit(task);
-
+    this.tasksEE.emit(task);
   }
 }

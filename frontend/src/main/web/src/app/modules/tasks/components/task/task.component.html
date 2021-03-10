@@ -2,8 +2,13 @@
 <td>{{task.id}}</td>
 <td>{{task.createDate  | dateFormatPipe }}</td>
 <td>{{task.description}}</td>
-<td (click)="onToggle(task)">
-  <i id="isDoneIcon" [className]="task.done ? 'fa fa-check-circle fa-x2' : 'fa fa-circle-thin fa-x2'" style="color:blue">
+<td>
+  <i
+    id="isDoneIcon"
+    [className]="task.done ? 'fa fa-check-circle fa-x2' : 'fa fa-circle-thin fa-x2'"
+    style="color:blue"
+    (click)="onUpdate(task)"
+  >
   </i>
 </td>
 <td>
@@ -11,4 +16,4 @@
 </td>
 
 
-	
+

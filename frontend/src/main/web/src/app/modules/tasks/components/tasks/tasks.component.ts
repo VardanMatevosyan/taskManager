@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {DoneMessageRender} from '../done-message-render/done-message-render.component';
+import {DoneMessageRenderComponent} from '../done-message-render/done-message-render.component';
 import {DeleteCellRender} from '../delete-cell-render/delete-cell-render.component';
 import * as moment from 'moment';
 
 import {Page} from '../../../../models/pagination/page';
 import {PaginationService} from '../../../../services/pagination/pagination.service';
 import {CommunicationService} from '../../../../services/communication/communication.service';
-import {HttpClientService} from '../../../../service/http-client.service';
+import {TaskService} from '../../service/task-service';
 import { Task } from '../../../../models/task';
 
 @Component({
@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
 
 
   constructor(
-    private httpClientService: HttpClientService,
+    private taskService: TaskService,
     private paginationService: PaginationService,
     private communicationService: CommunicationService
   ) {
@@ -112,7 +112,7 @@ export class TasksComponent implements OnInit {
     this.defaultColDef = {filter: true};
     this.context = {componentParent: this};
     this.frameworkComponents = {
-      doneMessageRenderer: DoneMessageRender,
+      doneMessageRenderer: DoneMessageRenderComponent,
       deleteCellRender: DeleteCellRender,
     };
 
@@ -161,7 +161,7 @@ export class TasksComponent implements OnInit {
   }
 
   public addTask(task: Task) {
-    this.httpClientService.saveTask(task).subscribe(
+    this.taskService.saveTask(task).subscribe(
       response => this.handleSuccess(response)
     );
 
@@ -181,7 +181,7 @@ export class TasksComponent implements OnInit {
 
   public deleteTask(task: Task) {
     let deleted: boolean = false;
-    this.httpClientService.deleteTask(task.id).subscribe(
+    this.taskService.deleteTask(task.id).subscribe(
       response => this.handleSuccessOnDelete(response, task)
     );
   }
@@ -216,7 +216,7 @@ export class TasksComponent implements OnInit {
 
   updateTask(task: Task) {
     task.done = !task.done;
-    this.httpClientService.updateTask(task);
+    this.taskService.updateTask(task);
   }
 
 }
